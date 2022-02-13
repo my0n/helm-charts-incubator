@@ -31,6 +31,20 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CERT_CN
+              value: {{ .Values.env.CERT_CN | quote }}
+            - name: CERT_ORGANIZATION
+              value: {{ .Values.env.CERT_ORGANIZATION | quote }}
+            - name: CERT_COUNTRY
+              value: {{ .Values.env.CERT_COUNTRY | quote }}
+            - name: CERT_STATE
+              value: {{ .Values.env.CERT_STATE | quote }}
+            - name: CERT_LOCALITY
+              value: {{ .Values.env.CERT_LOCALITY | quote }}
+            {{- with .Values.env.extra }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           ports:
             - name: taskd
               containerPort: 53589

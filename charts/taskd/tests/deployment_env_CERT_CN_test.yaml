@@ -1,0 +1,17 @@
+suite: deployment uses env.CERT_CN
+templates:
+  - deployment.yaml
+tests:
+  - it: uses env.CERT_CN
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    template: deployment.yaml
+    set:
+      env.CERT_CN: "cert-cn-test"
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_CN
+            value: "cert-cn-test"

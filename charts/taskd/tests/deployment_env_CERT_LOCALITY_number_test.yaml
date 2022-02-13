@@ -1,0 +1,17 @@
+suite: deployment uses env.CERT_LOCALITY
+templates:
+  - deployment.yaml
+tests:
+  - it: uses env.CERT_LOCALITY
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    template: deployment.yaml
+    set:
+      env.CERT_LOCALITY: 123
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_LOCALITY
+            value: "123"

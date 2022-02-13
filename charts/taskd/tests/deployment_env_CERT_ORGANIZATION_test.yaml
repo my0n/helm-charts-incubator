@@ -1,0 +1,17 @@
+suite: deployment uses env.CERT_ORGANIZATION
+templates:
+  - deployment.yaml
+tests:
+  - it: uses env.CERT_ORGANIZATION
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    template: deployment.yaml
+    set:
+      env.CERT_ORGANIZATION: "cert-organization-test"
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_ORGANIZATION
+            value: "cert-organization-test"
