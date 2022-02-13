@@ -1,0 +1,35 @@
+suite: deployment uses default environment variables
+templates:
+  - deployment.yaml
+tests:
+  - it: uses default environment variables
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    template: deployment.yaml
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_CN
+            value: ""
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_ORGANIZATION
+            value: ""
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_COUNTRY
+            value: ""
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_STATE
+            value: ""
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_LOCALITY
+            value: ""

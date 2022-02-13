@@ -1,0 +1,19 @@
+suite: deployment uses env.extra
+templates:
+  - deployment.yaml
+tests:
+  - it: uses env.extra
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    template: deployment.yaml
+    set:
+      env.extra:
+        - name: VERY_COOL_VARIABLE
+          value: it's super cool
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VERY_COOL_VARIABLE
+            value: "it's super cool"

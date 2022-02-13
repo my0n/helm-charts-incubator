@@ -25,6 +25,16 @@ persistence:
   # The storage class for the generated Persistent Volume Claim. If empty string (default), then the default provisioner will be used.
   storageClass: ""
 
+env:
+  CERT_CN: ""
+  CERT_ORGANIZATION: ""
+  CERT_COUNTRY: ""
+  CERT_STATE: ""
+  CERT_LOCALITY: ""
+  extra: []
+    #  - name: OTHER_ENV_VARIABLE
+    #    value: some value
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
