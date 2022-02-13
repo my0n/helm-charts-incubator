@@ -3,6 +3,23 @@ entries:
   taskd:
   - apiVersion: v2
     appVersion: v0.2.0
+    created: "2022-02-13T18:02:52.716995994Z"
+    description: An unofficial helm chart for a taskd (taskwarrior) server.
+    digest: 080761e60e030236b2602d86bec983228c37bc778aaa1a3430ae2b87e6023d91
+    home: https://github.com/my0n/helm-charts/tree/master/charts/taskd
+    maintainers:
+    - name: my0n
+    name: taskd
+    sources:
+    - https://github.com/my0n/helm-charts/tree/master/charts/taskd
+    - https://www.github.com/x4121/docker-taskd
+    - https://github.com/GothenburgBitFactory/taskserver
+    type: application
+    urls:
+    - https://github.com/my0n/helm-charts-incubator/releases/download/taskd-0.0.4/taskd-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: v0.2.0
     created: "2022-02-13T04:57:03.408770949Z"
     description: An unofficial helm chart for a taskd (taskwarrior) server.
     digest: 32b472ffec3fc2e59b74b7b7065b5c3fb468180e634e0d1a84f33c8a12fb5adb
@@ -52,4 +69,4 @@ entries:
     urls:
     - https://github.com/my0n/helm-charts-incubator/releases/download/taskd-admin-0.0.1/taskd-admin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-02-13T06:32:16.19152429Z"
+generated: "2022-02-13T18:02:52.717008195Z"
