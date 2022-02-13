@@ -17,8 +17,6 @@ admin:
     pullPolicy: IfNotPresent
     tag: "v0.0.1"
 
-  imagePullSecrets: []
-
 # Persistence for taskd data
 persistence:
   # If enabled, a Persistent Volume Claim will either be created or used.
