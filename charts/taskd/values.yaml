@@ -15,7 +15,7 @@ admin:
   image:
     repository: ghcr.io/my0n/taskd-admin
     pullPolicy: IfNotPresent
-    tag: "v0.0.1"
+    tag: "v0.0.3"
 
 # Persistence for taskd data
 persistence:
