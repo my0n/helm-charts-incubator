@@ -11,4 +11,4 @@ tests:
     asserts:
       - equal:
           path: spec.rules[0].http.paths[0].backend.service.port.number
-          value: 80
+          value: 8080
