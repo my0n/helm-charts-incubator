@@ -54,6 +54,20 @@ spec:
               name: data
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.admin.enabled }}
+        - name: {{ .Chart.Name }}-admin
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.admin.image.repository }}:{{ .Values.admin.image.tag }}"
+          imagePullPolicy: {{ .Values.admin.image.pullPolicy }}
+          ports:
+            - name: admin
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/taskd
+              name: data
+        {{- end }}
       volumes:
         - name: data
           {{- if and .Values.persistence.enabled .Values.persistence.existingClaim }}

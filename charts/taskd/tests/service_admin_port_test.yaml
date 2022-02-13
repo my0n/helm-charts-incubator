@@ -1,10 +1,11 @@
-suite: service uses service.port
+suite: service uses service.admin.port
 templates:
   - service.yaml
 tests:
-  - it: uses service.port
+  - it: uses service.admin.port
     set:
-      service.port: 9000
+      admin.enabled: true
+      service.admin.port: 9000
     asserts:
       - contains:
           path: spec.ports
@@ -12,4 +13,4 @@ tests:
             port: 9000
             targetPort: 8080
             protocol: TCP
-            name: http
+            name: admin

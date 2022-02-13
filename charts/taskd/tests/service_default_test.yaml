@@ -1,0 +1,13 @@
+suite: service uses default endpoints
+templates:
+  - service.yaml
+tests:
+  - it: uses default endpoints
+    asserts:
+      - equal:
+          path: spec.ports
+          value:
+            - port: 53589
+              targetPort: 53589
+              protocol: TCP
+              name: taskd

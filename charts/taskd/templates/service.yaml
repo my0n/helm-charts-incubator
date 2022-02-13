@@ -7,9 +7,15 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service.taskd.port }}
       targetPort: 53589
       protocol: TCP
       name: taskd
+    {{- if .Values.admin.enabled }}
+    - port: {{ .Values.service.admin.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: admin
+    {{- end }}
   selector:
     {{- include "taskd.selectorLabels" . | nindent 4 }}

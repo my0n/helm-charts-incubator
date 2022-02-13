@@ -25,17 +25,33 @@ Sample values.yaml given below; see [values.yaml](values.yaml) for more details.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+
+| admin.enabled | bool | `false` | If enabled, adds the taskd-admin sidecar to the pod. |
+| admin.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. |
+| admin.image.repository | string | `"ghcr.io/my0n/taskd-admin"` | Image repository. |
+| admin.image.tag | string | `"v0.0.1"` | Image tag. |
+| admin.imagePullSecrets | list | `[]` | Secrets for pulling an image. |
 | affinity | object | `{}` | Defines affinity constraint rules. Read more about `affinity` [here](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity). |
 | fullnameOverride | string | `""` | Override for full name of generated resources. |
+| env.CERT_CN | string | `""` |  |
+| env.CERT_COUNTRY | string | `""` |  |
+| env.CERT_LOCALITY | string | `""` |  |
+| env.CERT_ORGANIZATION | string | `""` |  |
+| env.CERT_STATE | string | `""` |  |
+| env.extra | list | `[]` |  |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. |
 | image.repository | string | `"x4121/taskd"` | Image repository. |
 | image.tag | string | `""` | Image tag. |
 | imagePullSecrets | list | `[]` | Secrets for pulling an image. |
+| ingress.admin.enabled | bool | `false` | Enables or disables the ingress rules for the taskd-admin service. |
+| ingress.admin.host | string | `"admin-example.local"` | Host address for the taskd-admin service. |
+| ingress.admin.path | string | `"/"` | Path for the taskd-admin service. |
+| ingress.admin.pathType | string | `"ImplementationSpecific"` | Ignored if not kubeVersion >= 1.18-0 |
 | ingress.annotations | object | `{}` | Provide additional ingress annotations if needed. |
-| ingress.enabled | bool | `false` | Enables or disables the ingress. |
-| ingress.host | string | `"chart-example.local"` | Host address. |
-| ingress.path | string | `"/"` | Path. |
-| ingress.pathType | string | `"ImplementationSpecific"` | Ignored if not kubeVersion >= 1.18-0 |
+| ingress.taskd.enabled | bool | `false` | Enables or disables the ingress for the taskd service. |
+| ingress.taskd.host | string | `"chart-example.local"` | Host address for the taskd service. |
+| ingress.taskd.path | string | `"/"` | Path for the taskd service. |
+| ingress.taskd.pathType | string | `"ImplementationSpecific"` | Ignored if not kubeVersion >= 1.18-0 |
 | ingress.tls | list | `[]` | Configure TLS for the ingress. |
 | nameOverride | string | `""` | Override for name of generated resources. |
 | nodeSelector | object | `{}` | Defines node selection constraints. Read more about `nodeSelector` [here](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector). |
@@ -49,7 +65,8 @@ Sample values.yaml given below; see [values.yaml](values.yaml) for more details.
 | podSecurityContext | object | `{}` | Pod security context. |
 | resources | object | `{}` | Set the resource limits/requests for the pod. |
 | securityContext | object | `{}` | Security context. |
-| service.port | int | `53589` | The port for the service. |
+| service.admin.port | int | `8080` | The port for the taskd-admin service. |
+| service.taskd.port | int | `53589` | The port for the taskd service. |
 | service.type | string | `"ClusterIP"` | The type of service. |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account. |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created. |

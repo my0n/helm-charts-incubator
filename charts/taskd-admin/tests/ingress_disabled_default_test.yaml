@@ -1,8 +1,0 @@
-suite: ingress is disabled by default
-templates:
-  - ingress.yaml
-tests:
-  - it: is disabled by default
-    asserts:
-      - hasDocuments:
-          count: 0

@@ -1,0 +1,25 @@
+suite: ingress uses service.taskd.port
+templates:
+  - ingress.yaml
+tests:
+  - it: uses service.taskd.port
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    set:
+      ingress.taskd.enabled: true
+      service.taskd.port: 9000
+    asserts:
+      - contains:
+          path: spec.rules
+          content:
+            host: chart-example.local
+            http:
+              paths:
+                - backend:
+                    service:
+                      name: RELEASE-NAME-taskd
+                      port:
+                        number: 9000
+                  path: /
+                  pathType: ImplementationSpecific

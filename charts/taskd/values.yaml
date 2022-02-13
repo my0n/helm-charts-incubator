@@ -8,6 +8,17 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+admin:
+  # If enabled, adds the taskd-admin sidecar to the pod.
+  enabled: false
+
+  image:
+    repository: ghcr.io/my0n/taskd-admin
+    pullPolicy: IfNotPresent
+    tag: "v0.0.1"
+
+  imagePullSecrets: []
+
 # Persistence for taskd data
 persistence:
   # If enabled, a Persistent Volume Claim will either be created or used.
@@ -27,10 +38,10 @@ persistence:
 
 env:
   CERT_CN: ""
-  CERT_ORGANIZATION: ""
   CERT_COUNTRY: ""
-  CERT_STATE: ""
   CERT_LOCALITY: ""
+  CERT_ORGANIZATION: ""
+  CERT_STATE: ""
   extra: []
     #  - name: OTHER_ENV_VARIABLE
     #    value: some value
@@ -59,16 +70,25 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 53589
+  taskd:
+    port: 53589
+  admin:
+    port: 8080
 
 ingress:
-  enabled: false
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  host: chart-example.local
-  path: /
-  pathType: ImplementationSpecific
+  taskd:
+    enabled: false
+    host: chart-example.local
+    path: /
+    pathType: ImplementationSpecific
+  admin:
+    enabled: false
+    host: admin-example.local
+    path: /
+    pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

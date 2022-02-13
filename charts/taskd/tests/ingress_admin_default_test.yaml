@@ -1,0 +1,25 @@
+suite: ingress uses default admin endpoint
+templates:
+  - ingress.yaml
+tests:
+  - it: uses default admin endpoint
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    set:
+      admin.enabled: true
+      ingress.admin.enabled: true
+    asserts:
+      - contains:
+          path: spec.rules
+          content:
+            host: admin-example.local
+            http:
+              paths:
+                - backend:
+                    service:
+                      name: RELEASE-NAME-taskd
+                      port:
+                        number: 8080
+                  path: /
+                  pathType: ImplementationSpecific
