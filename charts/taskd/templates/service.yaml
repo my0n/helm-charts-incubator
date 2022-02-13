@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "taskd.fullname" . }}
+  labels:
+    {{- include "taskd.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 53589
+      protocol: TCP
+      name: taskd
+  selector:
+    {{- include "taskd.selectorLabels" . | nindent 4 }}

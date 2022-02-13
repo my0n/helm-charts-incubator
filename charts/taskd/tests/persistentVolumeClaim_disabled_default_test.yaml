@@ -1,0 +1,8 @@
+suite: persistentVolumeClaim disabled by default
+templates:
+  - persistentVolumeClaim.yaml
+tests:
+  - it: is disabled by default
+    asserts:
+      - hasDocuments:
+          count: 0

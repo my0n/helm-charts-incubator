@@ -1,0 +1,10 @@
+suite: persistentVolumeClaim disabled
+templates:
+  - persistentVolumeClaim.yaml
+tests:
+  - it: is disabled
+    set:
+      persistence.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0

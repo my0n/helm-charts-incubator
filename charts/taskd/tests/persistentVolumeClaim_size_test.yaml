@@ -1,0 +1,12 @@
+suite: persistentVolumeClaim uses persistence.size
+templates:
+  - persistentVolumeClaim.yaml
+tests:
+  - it: uses persistence.size
+    set:
+      persistence.enabled: true
+      persistence.size: 20Gi
+    asserts:
+      - equal:
+          path: spec.resources.requests.storage
+          value: 20Gi

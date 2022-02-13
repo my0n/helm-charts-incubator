@@ -1,0 +1,13 @@
+suite: ingress is enabled via ingress.enabled
+templates:
+  - ingress.yaml
+tests:
+  - it: is enabled via ingress.enabled
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    set:
+      ingress.enabled: true
+    asserts:
+      - hasDocuments:
+          count: 1

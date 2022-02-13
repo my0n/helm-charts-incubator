@@ -1,0 +1,13 @@
+suite: persistentVolumeClaim uses persistence.annotations
+templates:
+  - persistentVolumeClaim.yaml
+tests:
+  - it: uses persistence.annotations
+    set:
+      persistence.enabled: true
+      persistence.annotations:
+        a8r.io/description: A very nice PVC
+    asserts:
+      - equal:
+          path: metadata.annotations.[a8r.io/description]
+          value: A very nice PVC

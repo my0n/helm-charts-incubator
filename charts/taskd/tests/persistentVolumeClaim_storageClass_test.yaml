@@ -1,0 +1,12 @@
+suite: persistentVolumeClaim uses persistence.storageClass
+templates:
+  - persistentVolumeClaim.yaml
+tests:
+  - it: uses persistence.storageClass
+    set:
+      persistence.enabled: true
+      persistence.storageClass: my-storage-class
+    asserts:
+      - equal:
+          path: spec.storageClassName
+          value: my-storage-class

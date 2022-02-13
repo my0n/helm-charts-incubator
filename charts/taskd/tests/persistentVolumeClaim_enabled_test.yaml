@@ -1,0 +1,10 @@
+suite: persistentVolumeClaim uses persistence.enabled
+templates:
+  - persistentVolumeClaim.yaml
+tests:
+  - it: uses persistence.enabled
+    set:
+      persistence.enabled: true
+    asserts:
+      - hasDocuments:
+          count: 1

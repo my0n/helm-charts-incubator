@@ -1,0 +1,15 @@
+suite: ingress uses service.port
+templates:
+  - ingress.yaml
+tests:
+  - it: uses service.port
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    set:
+      ingress.enabled: true
+      service.port: 9000
+    asserts:
+      - equal:
+          path: spec.rules[0].http.paths[0].backend.service.port.number
+          value: 9000
