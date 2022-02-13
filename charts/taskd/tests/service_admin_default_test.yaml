@@ -1,0 +1,19 @@
+suite: service uses default endpoints with admin
+templates:
+  - service.yaml
+tests:
+  - it: uses default endpoints with admin
+    set:
+      admin.enabled: true
+    asserts:
+      - equal:
+          path: spec.ports
+          value:
+            - port: 53589
+              targetPort: 53589
+              protocol: TCP
+              name: taskd
+            - port: 8080
+              targetPort: 8080
+              protocol: TCP
+              name: admin

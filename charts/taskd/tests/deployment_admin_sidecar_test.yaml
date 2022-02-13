@@ -1,0 +1,27 @@
+suite: deployment uses admin sidecar if enabled
+templates:
+  - deployment.yaml
+tests:
+  - it: uses admin sidecar if enabled
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    set:
+      admin.enabled: true
+      admin.image.tag: v1.0.0
+    template: deployment.yaml
+    asserts:
+      - contains:
+          path: spec.template.spec.containers
+          content:
+            image: ghcr.io/my0n/taskd-admin:v1.0.0
+            imagePullPolicy: IfNotPresent
+            name: taskd-admin
+            ports:
+            - containerPort: 8080
+              name: admin
+              protocol: TCP
+            securityContext: {}
+            volumeMounts:
+            - mountPath: /var/taskd
+              name: data

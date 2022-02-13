@@ -1,0 +1,26 @@
+suite: ingress uses service.admin.port
+templates:
+  - ingress.yaml
+tests:
+  - it: uses service.admin.port
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    set:
+      admin.enabled: true
+      ingress.admin.enabled: true
+      service.admin.port: 9000
+    asserts:
+      - contains:
+          path: spec.rules
+          content:
+            host: admin-example.local
+            http:
+              paths:
+                - backend:
+                    service:
+                      name: RELEASE-NAME-taskd
+                      port:
+                        number: 9000
+                  path: /
+                  pathType: ImplementationSpecific

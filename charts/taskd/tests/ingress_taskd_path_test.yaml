@@ -1,0 +1,25 @@
+suite: ingress uses ingress.taskd.path
+templates:
+  - ingress.yaml
+tests:
+  - it: uses ingress.taskd.path
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    set:
+      ingress.taskd.enabled: true
+      ingress.taskd.path: /my-test-path
+    asserts:
+      - contains:
+          path: spec.rules
+          content:
+            host: chart-example.local
+            http:
+              paths:
+                - backend:
+                    service:
+                      name: RELEASE-NAME-taskd
+                      port:
+                        number: 53589
+                  path: /my-test-path
+                  pathType: ImplementationSpecific
