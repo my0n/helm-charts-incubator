@@ -1,0 +1,13 @@
+suite: service uses service.port default
+templates:
+  - service.yaml
+tests:
+  - it: uses service.port default
+    asserts:
+      - contains:
+          path: spec.ports
+          content:
+            port: 8080
+            targetPort: 8080
+            protocol: TCP
+            name: http
