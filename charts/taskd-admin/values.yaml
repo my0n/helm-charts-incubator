@@ -1,5 +1,5 @@
 image:
-  repository: x4121/taskd
+  repository: ghcr.io/my0n/taskd-admin
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -7,15 +7,6 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
-admin:
-  # If enabled, adds the taskd-admin sidecar to the pod.
-  enabled: false
-
-  image:
-    repository: ghcr.io/my0n/taskd-admin
-    pullPolicy: IfNotPresent
-    tag: "v0.0.3"
 
 # Persistence for taskd data
 persistence:
@@ -40,9 +31,23 @@ env:
   CERT_LOCALITY: ""
   CERT_ORGANIZATION: ""
   CERT_STATE: ""
+  # Set to true to enable the admin API feature.
+  TASKD_ADMIN_ENABLED: false
+  # If left empty, then env.TASKD_ADMIN_USER will be ignored. It's more secure to pass this in as a secret via env.extra.
+  TASKD_ADMIN_USER: ""
+  # If left empty, then env.TASKD_ADMIN_PASS will be ignored. It's more secure to pass this in as a secret via env.extra.
+  TASKD_ADMIN_PASS: ""
   extra: []
-    #  - name: OTHER_ENV_VARIABLE
-    #    value: some value
+    #  - name: TASKD_ADMIN_USER
+    #    valueFrom:
+    #      secretKeyRef:
+    #        name: taskd-admin-secrets
+    #        key: user
+    #  - name: TASKD_ADMIN_PASS
+    #    valueFrom:
+    #      secretKeyRef:
+    #        name: taskd-admin-secrets
+    #        key: pass
 
 serviceAccount:
   # Specifies whether a service account should be created

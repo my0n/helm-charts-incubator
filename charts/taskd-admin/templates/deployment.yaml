@@ -43,10 +43,29 @@ spec:
               value: {{ .Values.env.CERT_STATE | quote }}
             - name: CERT_LOCALITY
               value: {{ .Values.env.CERT_LOCALITY | quote }}
+            - name: TASKD_ADMIN_ENABLED
+              {{- if .Values.env.TASKD_ADMIN_ENABLED }}
+              value: "1"
+              {{- else }}
+              value: "0"
+              {{- end }}
+            {{- if .Values.env.TASKD_ADMIN_USER }}
+            - name: TASKD_ADMIN_USER
+              value: {{ .Values.env.TASKD_ADMIN_USER | quote }}
+            {{- end }}
+            {{- if .Values.env.TASKD_ADMIN_PASS }}
+            - name: TASKD_ADMIN_PASS
+              value: {{ .Values.env.TASKD_ADMIN_PASS | quote }}
+            {{- end }}
             {{- with .Values.env.extra }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
           ports:
+            {{- if .Values.env.TASKD_ADMIN_ENABLED }}
+            - name: admin
+              containerPort: 8080
+              protocol: TCP
+            {{- end }}
             - name: taskd
               containerPort: 53589
               protocol: TCP
@@ -55,20 +74,6 @@ spec:
               name: data
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        {{- if .Values.admin.enabled }}
-        - name: {{ .Chart.Name }}-admin
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.admin.image.repository }}:{{ .Values.admin.image.tag }}"
-          imagePullPolicy: {{ .Values.admin.image.pullPolicy }}
-          ports:
-            - name: admin
-              containerPort: 8080
-              protocol: TCP
-          volumeMounts:
-            - mountPath: /var/taskd
-              name: data
-        {{- end }}
       volumes:
         - name: data
           {{- if and .Values.persistence.enabled .Values.persistence.existingClaim }}

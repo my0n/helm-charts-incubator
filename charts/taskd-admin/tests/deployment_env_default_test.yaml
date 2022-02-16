@@ -33,3 +33,23 @@ tests:
           content:
             name: CERT_LOCALITY
             value: ""
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: CERT_LOCALITY
+            value: ""
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: TASKD_ADMIN_ENABLED
+            value: "0"
+      - notContains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: TASKD_ADMIN_USER
+          any: true
+      - notContains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: TASKD_ADMIN_PASS
+          any: true

@@ -11,7 +11,7 @@ spec:
       targetPort: 53589
       protocol: TCP
       name: taskd
-    {{- if .Values.admin.enabled }}
+    {{- if .Values.env.TASKD_ADMIN_ENABLED }}
     - port: {{ .Values.service.admin.port }}
       targetPort: 8080
       protocol: TCP

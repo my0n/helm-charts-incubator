@@ -1,8 +1,8 @@
-suite: ingress is disabled if ingress.admin.enabled is true but admin.enabled is false
+suite: ingress is disabled if ingress.admin.enabled is true but env.TASKD_ADMIN_ENABLED is false
 templates:
   - ingress.yaml
 tests:
-  - it: is disabled if ingress.admin.enabled is true but admin.enabled is false
+  - it: is disabled if ingress.admin.enabled is true but env.TASKD_ADMIN_ENABLED is false
     chart:
       version: 1.0.0
       appVersion: 1.0.0
