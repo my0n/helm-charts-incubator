@@ -18,7 +18,7 @@ tests:
               paths:
                 - backend:
                     service:
-                      name: RELEASE-NAME-taskd
+                      name: RELEASE-NAME-taskd-admin
                       port:
                         number: 9000
                   path: /
