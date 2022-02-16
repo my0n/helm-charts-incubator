@@ -1,4 +1,4 @@
-{{- if or .Values.ingress.taskd.enabled (and .Values.admin.enabled .Values.ingress.admin.enabled) -}}
+{{- if or .Values.ingress.taskd.enabled (and .Values.env.TASKD_ADMIN_ENABLED .Values.ingress.admin.enabled) -}}
 {{- $fullName := include "taskd.fullname" . -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
@@ -55,7 +55,7 @@ spec:
               servicePort: {{ .Values.service.taskd.port }}
               {{- end }}
     {{- end }}
-    {{- if and .Values.admin.enabled .Values.ingress.admin.enabled }}
+    {{- if and .Values.env.TASKD_ADMIN_ENABLED .Values.ingress.admin.enabled }}
     - host: {{ .Values.ingress.admin.host | quote }}
       http:
         paths:

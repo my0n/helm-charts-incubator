@@ -4,7 +4,7 @@ templates:
 tests:
   - it: uses default endpoints with admin
     set:
-      admin.enabled: true
+      env.TASKD_ADMIN_ENABLED: true
     asserts:
       - equal:
           path: spec.ports

@@ -25,11 +25,6 @@ Sample values.yaml given below; see [values.yaml](values.yaml) for more details.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-
-| admin.enabled | bool | `false` | If enabled, adds the taskd-admin sidecar to the pod. |
-| admin.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. |
-| admin.image.repository | string | `"ghcr.io/my0n/taskd-admin"` | Image repository. |
-| admin.image.tag | string | `"v0.0.3"` | Image tag. |
 | affinity | object | `{}` | Defines affinity constraint rules. Read more about `affinity` [here](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity). |
 | fullnameOverride | string | `""` | Override for full name of generated resources. |
 | env.CERT_CN | string | `""` |  |
@@ -38,6 +33,9 @@ Sample values.yaml given below; see [values.yaml](values.yaml) for more details.
 | env.CERT_ORGANIZATION | string | `""` |  |
 | env.CERT_STATE | string | `""` |  |
 | env.extra | list | `[]` |  |
+| env.TASKD_ADMIN_ENABLED | string | `""` |  |
+| env.TASKD_ADMIN_PASS | string | `""` |  |
+| env.TASKD_ADMIN_USER | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. |
 | image.repository | string | `"x4121/taskd"` | Image repository. |
 | image.tag | string | `""` | Image tag. |

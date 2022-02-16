@@ -4,7 +4,7 @@ templates:
 tests:
   - it: uses service.admin.port
     set:
-      admin.enabled: true
+      env.TASKD_ADMIN_ENABLED: true
       service.admin.port: 9000
     asserts:
       - contains:

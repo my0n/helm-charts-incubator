@@ -1,0 +1,17 @@
+suite: deployment uses env.TASKD_ADMIN_PASS
+templates:
+  - deployment.yaml
+tests:
+  - it: uses env.TASKD_ADMIN_PASS
+    chart:
+      version: 1.0.0
+      appVersion: 1.0.0
+    template: deployment.yaml
+    set:
+      env.TASKD_ADMIN_PASS: "test-pass"
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: TASKD_ADMIN_PASS
+            value: "test-pass"
