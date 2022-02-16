@@ -15,4 +15,4 @@ tests:
           content:
             name: data
             persistentVolumeClaim:
-              claimName: RELEASE-NAME-taskd
+              claimName: RELEASE-NAME-taskd-admin
