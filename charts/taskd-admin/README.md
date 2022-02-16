@@ -1,8 +1,8 @@
-# my0n/taskd
+# my0n/taskd-admin
 
-An unofficial helm chart for [taskd](https://github.com/GothenburgBitFactory/taskserver).
+The official helm chart for [taskd-admin](https://github.com/my0n/taskd-admin).
 
-**This chart is not maintained by the upstream project and any issues with the chart should be raised [here](https://github.com/my0n/helm-charts/issues/new).**
+**This chart is not maintained by the taskwarrior project and any issues with the chart should be raised [here](https://github.com/my0n/helm-charts/issues/new).**
 
 ## Example usage
 
@@ -11,7 +11,7 @@ Install the helm chart:
 ```sh
 helm repo add my0n https://my0n.github.io/helm-charts
 helm repo update
-helm install taskd my0n/taskd -f values.yaml
+helm install taskd my0n/taskd-admin -f values.yaml
 ```
 
 Sample values.yaml given below; see [values.yaml](values.yaml) for more details.
